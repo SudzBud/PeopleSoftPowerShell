@@ -3,14 +3,15 @@
   $mailbox = Get-Mailbox $alias
   $mailbox.emailAddresses+= $newPrimaryAddress
   $mailbox.primarysmtpaddress = $newPrimaryAddress
+  Set-Mailbox $mailbox.identity -EmailAddressPolicyEnabled $false
   Set-Mailbox $mailbox.identity -emailAddresses $mailbox.emailAddresses
   Set-Mailbox $mailbox.identity -PrimarySmtpAddress $mailbox.primarysmtpaddress
 }
 # SIG # Begin signature block
 # MIIPAAYJKoZIhvcNAQcCoIIO8TCCDu0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWY+SHD1DiHmZRKC5C68L2POe
-# ZwKgggxzMIIGETCCA/mgAwIBAgIKYTLgOwAAAAAAAjANBgkqhkiG9w0BAQUFADBH
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUaX9gANEFNNrXGts0CtppDsfB
+# zC2gggxzMIIGETCCA/mgAwIBAgIKYTLgOwAAAAAAAjANBgkqhkiG9w0BAQUFADBH
 # MRMwEQYKCZImiZPyLGQBGRYDY29tMRowGAYKCZImiZPyLGQBGRYKa3VydHNhbG1v
 # bjEUMBIGA1UEAxMLS1NHIFJvb3QgQ0EwHhcNMTExMTIzMTYwMDUwWhcNMTkxMTIz
 # MTYxMDUwWjBIMRMwEQYKCZImiZPyLGQBGRYDY29tMRowGAYKCZImiZPyLGQBGRYK
@@ -80,12 +81,12 @@
 # JomT8ixkARkWA2NvbTEaMBgGCgmSJomT8ixkARkWCmt1cnRzYWxtb24xFTATBgNV
 # BAMTDEtTRyBTdWJDQSAwMQIKQwIxRQAAAAApEDAJBgUrDgMCGgUAoHgwGAYKKwYB
 # BAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAc
-# BgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUE0Wc
-# XN6hwo5Vl85Urp/mxCnn4akwDQYJKoZIhvcNAQEBBQAEggEAeq8QeEUMTWSQWjeI
-# IRA8HjBI6anAalskLrEi1VBuFDimKsuhkgUg2rliVmtm8/RHXuX6xnSZyOsP0/0Y
-# phveNstUaulbsTg+92PT+sEt+E2LKSt1JK0uS6KMq6kfqcUOf2nryP1g/FCfN9bE
-# uAEePIfOlfqEVOgHm6KJ8ylgqb9LuZ961fW2VXwnNipuRBUfHSWz5jWAocCa9+Gb
-# tUgR5Umg7YpawKhLsuQVDkJBeEMhWQG2GBAwO8eKRqyfWbVnZilYSOqJsRZmkwTd
-# XRF5ot6GVz8txby+mfzqs35w4oW36IEvUfmdEUSFgytPjvC8KHcXvkjC2tiWCuQq
-# WdttSw==
+# BgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUuZyj
+# 0pzwV4cB7cS10bzg8wxjMvwwDQYJKoZIhvcNAQEBBQAEggEAVCVOX+il55TgZRCo
+# pCCoPOCnBj/Aj9crnWfbmwbLEgNdqz3VH1j4VCUzmYu86uEceBuvGSqr4ww1eQj/
+# VVgD0esr4DusnPkF0/EPmiywIy/pZI6ClyQlr72D4wQQfv/UYhnSLoJ8Sx5+/mc5
+# AK4ymjjeZCow7mAKMWUXO5jJd/pzD3nSnYCm2N4lchaA52OatdgvHi2VC0OAe6di
+# 3ojsWk4z0NPBrjI/CPOUSZmT1ndQuGW8bsxgcN7+LeLGlLtuhrzLVWkAAfwP5rON
+# QPjYohHVHvWzKHGS36qkxG7sjoQjYHj/3otthVKsnLUwq+BAqFTq2xRY81SsLYsU
+# BfuC8g==
 # SIG # End signature block
