@@ -67,7 +67,7 @@ function Set-ksPSAdUser($userObj){
 	if ($action -eq "Create"){
 		$CreateUserCMD += "`$AccountPassword = `$(convertTo-SecureString `"$password`" -AsPlainText -Force)`n"
 		$CreateUserCMD += "New-ADUser -Name `"$displayName`" -SAMAccountName `"$suggestedAlias`" -UserPrincipalName `"$userPrincipalName`" -AccountPassword `$AccountPassword -Enabled `$True -Path `"$OUpath`" -Credential `$AdminCred -OtherAttributes @{extensionattribute2 = `"$extensionAttribute2`"}`n"
-		$CreateUserCMD += "do {sleep 3} until (get-aduser `"$suggestedAlias`")`"`n"
+		$CreateUserCMD += "do {sleep 3} until (get-aduser `"$suggestedAlias`")`n"
     $CreateUserCMD += "Enable-Mailbox `"$suggestedAlias`" -Database `"$MBXdatabase`"`n"
 		$CreateUserCMD += "Set-Mailbox `"$suggestedAlias`" -scljunkenabled:`$true -scljunkthreshold:4"
 		$getUserObjectCMD = "`$userObject = Get-ADUser `"$suggestedAlias`"`n"
@@ -237,8 +237,8 @@ $attribsChgHeader
 # SIG # Begin signature block
 # MIIPAAYJKoZIhvcNAQcCoIIO8TCCDu0CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCvOws+vPXTOH4t2wX7JsvM/T
-# WimgggxzMIIGETCCA/mgAwIBAgIKYTLgOwAAAAAAAjANBgkqhkiG9w0BAQUFADBH
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4fKZbgvTimtsiaPG/6gK2GlR
+# IFWgggxzMIIGETCCA/mgAwIBAgIKYTLgOwAAAAAAAjANBgkqhkiG9w0BAQUFADBH
 # MRMwEQYKCZImiZPyLGQBGRYDY29tMRowGAYKCZImiZPyLGQBGRYKa3VydHNhbG1v
 # bjEUMBIGA1UEAxMLS1NHIFJvb3QgQ0EwHhcNMTExMTIzMTYwMDUwWhcNMTkxMTIz
 # MTYxMDUwWjBIMRMwEQYKCZImiZPyLGQBGRYDY29tMRowGAYKCZImiZPyLGQBGRYK
@@ -308,12 +308,12 @@ $attribsChgHeader
 # JomT8ixkARkWA2NvbTEaMBgGCgmSJomT8ixkARkWCmt1cnRzYWxtb24xFTATBgNV
 # BAMTDEtTRyBTdWJDQSAwMQIKQwIxRQAAAAApEDAJBgUrDgMCGgUAoHgwGAYKKwYB
 # BAGCNwIBDDEKMAigAoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAc
-# BgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlWIs
-# 8t+XOM5aTi4I03F2J4kMvX8wDQYJKoZIhvcNAQEBBQAEggEAZQVqEfQTQTDyrdlz
-# R+QtvJUnFSmi5GOYtNE7m9nfQOnuNiic4v/0neouVbeHPib26jzZfVQgv10DeUnV
-# aI4Uz/vrJgXmFrExR+/59/UVQIhf/6bFWFX+SOTVCmmcC3vj0JplGA0Ji72ll4R+
-# hW8mWkwEkyqeZapEBGhm+90xKMm6XOq8+N/2teDMii8szwcTBqYAUNYjtzaJgD0x
-# zjDoHsTmc0nTKAtps4853x95oUynFkCZgvo0ijQijYg5geu3gQq8w00UGrjodCRR
-# IvguOPa0upfaQFWU6DYZfMDJXmUmEGa0IwZt4YS+0u/kfuSkuYM7sYjlXdRgbnrU
-# CJYuUg==
+# BgorBgEEAYI3AgELMQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUBpv3
+# bggrPX94M9R8XbiJDeIZJkgwDQYJKoZIhvcNAQEBBQAEggEAB714UJxkvlqpdBjf
+# G/Jh4OLpeGiGp7H79GvqwLxRRiHhFm2Ik+mWVHIzF7o6bNbkYlBx4IBszXHTRWB2
+# Pk5nibjXG/J292OOLJUfzzqrUPhBfTOSPm+wHu0Q47uJSPiLIi3BzCRIw1bFqnjz
+# vaXqpDYKbVFL2MOmLgGl1YOvk8xtlsWuLKujjaCOqZEPkweLhFNtwtk84b3m+KiA
+# E7V3mX42+YbicEueSl5oqcOylQC0hF9x/+e8BOGYEpmrsdRPLSyoCprR54uUu3ex
+# qMkGUdL2kqLCBCVkW2t/jVc5KTmWo4dBfol/aA5SJyLX86rTMjN+JBzuuFpTdyDc
+# +eKLdQ==
 # SIG # End signature block
