@@ -7,8 +7,8 @@ Set-ExecutionPolicy RemoteSigned -Scope Process -Force
 }
 
 $ExServer = Read-Host "Enter Exchange ServerName"
-if (Test-Path "C:\Development Workspace\Network Group - Development-Branch\PowerShell Scripts\KSA _Email\AdminCred.clixml"){
-$AdminCred = Import-Clixml "C:\Development Workspace\Network Group - Development-Branch\PowerShell Scripts\KSA _Email\AdminCred.clixml"}
+if (Test-Path "C:\DevelopmentWorkspace\Network Group - Development-Branch\PowerShell Scripts\KSA _Email\AdminCred.clixml"){
+$AdminCred = Import-Clixml "C:\DevelopmentWorkspace\Network Group - Development-Branch\PowerShell Scripts\KSA _Email\AdminCred.clixml"}
 else{$AdminCred = Get-Credential
 }
 $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionURI http://$ExServer/PowerShell/ -Authentication Kerberos -Credential $AdminCred
