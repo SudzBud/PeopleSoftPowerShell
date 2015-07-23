@@ -120,13 +120,29 @@ if(!($incomingfiles)){Break}
 				$($importuser.PREF_FIRST_NAME)}else{$($importuser.FIRST_NAME)
 				})
 		$adFMTuser | Add-Member NoteProperty -Name middlename $importuser.MIDDLE_NAME
-		$combineName = $($adFMTuser.givenname + "." + $adFMTuser.surname).tolower()
+    $combineName = $($adFMTuser.givenname + "." + $adFMTuser.surname).ToLower()
 		$asciiName = Remove-Diacritics -string $combineName
 		$suggestedAlias = Remove-SpecialChars $asciiName
-		if (($combineName -ne $suggestedAlias) -and ($adFMTuser.I_ROW_FLAG -eq "C")){
-			$flag = $true
-			$flagReason += "###Person's name contains diacritics or special characters. Login name may need to be adjusted for New Account.###`n"
-		}
+
+    if($importuser.EMAIL_ADDR){
+      $importedEmailAddress = $($importuser.EMAIL_ADDR).ToLower()
+      $importedEmailAlias = $($($importedEmailAddress).Replace('@kurtsalmon.com',''))
+		  if (($importedEmailAlias -ne $suggestedAlias) -and ($adFMTuser.I_ROW_FLAG -eq "C")){
+        $suggestedAlias = $importedEmailAlias
+			  $flag = $true
+			  $flagReason += "###Person has suggested Email Address different from SuggestedAlias. Verify validity.###`n"
+		  }
+      if(($importedEmailAlias -ne $combineName) -and ($adFMTuser.I_ROW_FLAG -eq "C")){
+        $flag = $true
+			  $flagReason += "###Person has suggested Email Address different from First.Last. Possible diacritics or special characters. Verify validity.###`n"
+      }
+    }else{
+		  if (($combineName -ne $suggestedAlias) -and ($adFMTuser.I_ROW_FLAG -eq "C")){
+			  $flag = $true
+			  $flagReason += "###Person's name contains diacritics or special characters. Login name may need to be adjusted for New Account.###`n"
+		  }
+    }
+
 		$adFMTuser | Add-Member NoteProperty -Name suggestedAlias $suggestedAlias
 		$adFMTuser | Add-Member NoteProperty -Name GenerationQualifier $importuser.NAME_SUFFIX
 		$adFMTuser | Add-Member NoteProperty -Name PersonalTitle $importuser.NAME_PREFIX
