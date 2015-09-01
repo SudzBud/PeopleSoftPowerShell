@@ -151,8 +151,8 @@ if(!($incomingfiles)){Break}
 					$($importuser.LAST_NAME + ", " + $importuser.FIRST_NAME)
 				})
 		[int]$PSID = $adFMTuser.EMPLID
-		if (Get-Aduser -filter {ExtensionAttribute2 -eq $PSID}){
-			$ADUser = $(Get-Aduser -filter {ExtensionAttribute2 -eq $PSID} -Properties $adproperties)
+		if (Get-Aduser -filter "ExtensionAttribute2 -eq $PSID"){
+			$ADUser = $(Get-Aduser -filter "ExtensionAttribute2 -eq $PSID" -Properties $adproperties)
 			if ($adFMTuser.I_ROW_FLAG -eq "M") {
 				if (($adFMTuser.givenname -ne $ADUser.GivenName) -or ($adFMTuser.surname -ne $ADUser.surName) -or ($adFMTuser.displayName -ne $ADUser.DisplayName)){
 					$flag = $true
@@ -176,7 +176,7 @@ if(!($incomingfiles)){Break}
 		} else {
 			$testname = $adFMTuser.suggestedAlias
 			$testmail = $testname + "@kurtsalmon.com"
-			$ADUser = get-aduser -Filter {samaccountname -eq $testname} -Properties $adproperties
+			$ADUser = get-aduser -Filter "samaccountname -eq $testname" -Properties $adproperties
 			$mailRecip = get-recipient -erroraction:silentlycontinue $testmail
 			if ($ADUser){
 				$flag = $true
@@ -210,7 +210,7 @@ if(!($incomingfiles)){Break}
 		$adFMTuser | Add-Member NoteProperty -Name Title $importuser.DESCR_JOBCODE
 		$S_ID = $importuser.SUPERVISOR_ID
 		if($S_ID){
-			$manager = $(Get-ADUser -filter {extensionattribute2 -eq $S_ID})
+			$manager = $(Get-ADUser -filter "extensionattribute2 -eq $S_ID")
 			$adFMTuser | Add-Member NoteProperty -Name manager $manager
 		}		
 		$adFMTuser | Add-Member NoteProperty -Name msExchAssistantName $importuser.I_EMPLID_SECRET
@@ -315,21 +315,21 @@ if(!($incomingfiles)){Break}
 #REGION Set-PS_ADHR_newhire_Data
 	if ($newhireOutPSdataEU){
 		$newhireOutPSdataALL = $newhireOutPSdataEU | Select-Object I_ROW_FLAG,EMPLID,@{
-		name="EMAIL";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter {ExtensionAttribute2 -eq $ID} -properties mail).mail}
+		name="EMAIL";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter "ExtensionAttribute2 -eq $ID" -properties mail).mail}
 		},@{
-		name="LOGIN";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter {ExtensionAttribute2 -eq $ID} -properties SAMAccountName).SAMAccountName} 
+		name="LOGIN";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter "ExtensionAttribute2 -eq $ID" -properties SAMAccountName).SAMAccountName} 
 		}
 	}
 	if (($newhireOutPSdataNA) -and ($newhireOutPSdataEU)){
 		$newhireOutPSdataALL += $newhireOutPSdataNA | Select-Object I_ROW_FLAG,EMPLID,@{
-		name="EMAIL";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter {ExtensionAttribute2 -eq $ID} -properties mail).mail}
+		name="EMAIL";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter "ExtensionAttribute2 -eq $ID" -properties mail).mail}
 		},@{
-		name="LOGIN";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter {ExtensionAttribute2 -eq $ID} -properties SAMAccountName).SAMAccountName} 
+		name="LOGIN";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter "ExtensionAttribute2 -eq $ID" -properties SAMAccountName).SAMAccountName} 
 		}
 	}else{$newhireOutPSdataALL = $newhireOutPSdataNA | Select-Object I_ROW_FLAG,EMPLID,@{
-		name="EMAIL";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter {ExtensionAttribute2 -eq $ID} -properties mail).mail}
+		name="EMAIL";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter "ExtensionAttribute2 -eq $ID" -properties mail).mail}
 		},@{
-		name="LOGIN";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter {ExtensionAttribute2 -eq $ID} -properties SAMAccountName).SAMAccountName} 
+		name="LOGIN";expression={[string]$ID = $_.EMPLID; $(Get-Aduser -filter "ExtensionAttribute2 -eq $ID" -properties SAMAccountName).SAMAccountName} 
 		}
 	}
 #ENDREGION Set-PS_ADHR_Newhire_Data
