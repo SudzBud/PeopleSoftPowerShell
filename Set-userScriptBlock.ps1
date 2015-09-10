@@ -74,38 +74,38 @@ function Set-ksPSAdUser($userObj){
 	} else {$getUserObjectCMD = "`$userObject = Get-ADUser -filter {extensionAttribute2 -eq $extensionAttribute2}`n"}
 	
 	#Create Primary Attributes Command
-	if ($displayName -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -displayName:`"$displayName`" -Credential `$AdminCred`n"}
-	if ($givenname -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -givenname:`"$givenname`" -Credential `$AdminCred`n"}
-	if ($surName -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -surname:`"$surName`" -Credential `$AdminCred`n"}
-	if ($mobile -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -mobile:`"$mobile`" -Credential `$AdminCred`n"}
-	if ($FacsimileTelephoneNumber -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -fax:`"$FacsimileTelephoneNumber`" -Credential `$AdminCred`n"}
-	if ($Division -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -Division:`"$Division`" -Credential `$AdminCred`n"}
-	if ($Department -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -Department:`"$Department`" -Credential `$AdminCred`n"}
-	if ($Office -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -Office:`"$Office`" -Credential `$AdminCred`n"}
-	if ($title -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -title:`"$title`" -Credential `$AdminCred`n"}
-	if ($manager -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -manager:`"$manager`" -Credential `$AdminCred`n"}
-	if ($Company -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -Company:`"$Company`" -Credential `$AdminCred`n"}
-	if ($streetAddress -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -streetAddress:`"$streetAddress`" -Credential `$AdminCred`n"}
-	if ($city -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -city:`"$city`" -Credential `$AdminCred`n"}
-	if ($state -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -state:`"$state`" -Credential `$AdminCred`n"}
-	if ($postalcode -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -postalcode:`"$postalcode`" -Credential `$AdminCred`n"}
-	if ($Country -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -Country:`"$Country`" -Credential `$AdminCred`n"}
-	if ($telephonenumber -ne ""){$primaryAttributeCMD += "`$userObject | Set-ADUser -officePhone:`"$telephonenumber`" -Credential `$AdminCred`n"}
+	if ($displayName -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -displayName:`"$displayName`" -Credential `$AdminCred`n"}
+	if ($givenname -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -givenname:`"$givenname`" -Credential `$AdminCred`n"}
+	if ($surName -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -surname:`"$surName`" -Credential `$AdminCred`n"}
+	if ($mobile -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -mobile:`"$mobile`" -Credential `$AdminCred`n"}
+	if ($FacsimileTelephoneNumber -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -fax:`"$FacsimileTelephoneNumber`" -Credential `$AdminCred`n"}
+	if ($Division -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Division:`"$Division`" -Credential `$AdminCred`n"}
+	if ($Department -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Department:`"$Department`" -Credential `$AdminCred`n"}
+	if ($Office -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Office:`"$Office`" -Credential `$AdminCred`n"}
+	if ($title -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -title:`"$title`" -Credential `$AdminCred`n"}
+	if ($manager -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -manager:`"$manager`" -Credential `$AdminCred`n"}
+	if ($Company -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Company:`"$Company`" -Credential `$AdminCred`n"}
+	if ($streetAddress -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -streetAddress:`"$streetAddress`" -Credential `$AdminCred`n"}
+	if ($city -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -city:`"$city`" -Credential `$AdminCred`n"}
+	if ($state -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -state:`"$state`" -Credential `$AdminCred`n"}
+	if ($postalcode -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -postalcode:`"$postalcode`" -Credential `$AdminCred`n"}
+	if ($Country -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Country:`"$Country`" -Credential `$AdminCred`n"}
+	if ($telephonenumber -ne ""){$primaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -officePhone:`"$telephonenumber`" -Credential `$AdminCred`n"}
 
 	#Create Secondary Attributes Command
-	if ($personalTitle -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{personaltitle = `"$personalTitle`"}`n"}
-	if ($middlename -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{middlename = `"$middlename`"}`n"}
-	if ($msExchAssistantName -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{msexchassistantname = `"$msExchAssistantName`"}`n"}
-	if ($generationQualifier -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{generationqualifier = `"$generationQualifier`"}`n"}
-	if ($extensionAttribute1 -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{extensionattribute1 = `"$extensionAttribute1`"}`n"}
-	if ($extensionAttribute3 -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{extensionattribute3 = `"$extensionAttribute3`"}`n"}
-	if ($extensionAttribute4 -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{extensionattribute4 = `"$extensionAttribute4`"}`n"}
-	if ($extensionAttribute5 -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{extensionattribute5 = `"$extensionAttribute5`"}`n"}
-	if ($extensionAttribute6 -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{extensionattribute6 = `"$extensionAttribute6`"}`n"}
-	if ($extensionAttribute9 -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{extensionattribute9 = `"$extensionAttribute9`"}`n"}
-	if ($extensionAttribute12 -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{extensionattribute12 = `"$extensionAttribute12`"}`n"}
-	if ($extensionAttribute13 -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{extensionattribute13 = `"$extensionAttribute13`"}`n"}
-	if ($extensionAttribute14 -ne "") {$secondaryAttributeCMD += "`$userObject | Set-ADUser -Credential `$AdminCred -add @{extensionattribute14 = `"$extensionAttribute14`"}`n"}
+	if ($personalTitle -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{personaltitle = `"$personalTitle`"}`n"}
+	if ($middlename -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{middlename = `"$middlename`"}`n"}
+	if ($msExchAssistantName -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{msexchassistantname = `"$msExchAssistantName`"}`n"}
+	if ($generationQualifier -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{generationqualifier = `"$generationQualifier`"}`n"}
+	if ($extensionAttribute1 -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{extensionattribute1 = `"$extensionAttribute1`"}`n"}
+	if ($extensionAttribute3 -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{extensionattribute3 = `"$extensionAttribute3`"}`n"}
+	if ($extensionAttribute4 -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{extensionattribute4 = `"$extensionAttribute4`"}`n"}
+	if ($extensionAttribute5 -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{extensionattribute5 = `"$extensionAttribute5`"}`n"}
+	if ($extensionAttribute6 -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{extensionattribute6 = `"$extensionAttribute6`"}`n"}
+	if ($extensionAttribute9 -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{extensionattribute9 = `"$extensionAttribute9`"}`n"}
+	if ($extensionAttribute12 -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{extensionattribute12 = `"$extensionAttribute12`"}`n"}
+	if ($extensionAttribute13 -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{extensionattribute13 = `"$extensionAttribute13`"}`n"}
+	if ($extensionAttribute14 -ne "") {$secondaryAttributeCMD += "`$userObject.SamAccountName | Set-ADUser -Credential `$AdminCred -add @{extensionattribute14 = `"$extensionAttribute14`"}`n"}
 
 	#Get Attributes to be changed for logging
 	if ($action -ne "Create"){
@@ -169,28 +169,28 @@ $CreateUserCMD
 $getUserObjectCMD
 
 #Clear Attributes
-`$userObject | Set-ADUser -clear extensionattribute1 -Credential `$AdminCred
-`$userObject | Set-ADUser -clear extensionattribute3 -Credential `$AdminCred
-`$userObject | Set-ADUser -clear extensionattribute4 -Credential `$AdminCred
-`$userObject | Set-ADUser -clear extensionattribute5 -Credential `$AdminCred
-`$userObject | Set-ADUser -clear extensionattribute6 -Credential `$AdminCred
-`$userObject | Set-ADUser -clear extensionattribute9 -Credential `$AdminCred
-`$userObject | Set-ADUser -clear extensionattribute12 -Credential `$AdminCred
-`$userObject | Set-ADUser -clear extensionattribute13 -Credential `$AdminCred
-`$userObject | Set-ADUser -clear extensionattribute14 -Credential `$AdminCred
-`$userObject | Set-ADUser -clear personalTitle -Credential `$AdminCred
-`$userObject | Set-ADUser -clear middleName -Credential `$AdminCred
-`$userObject | Set-ADUser -clear telephonenumber -Credential `$AdminCred
-`$userObject | Set-ADUser -clear mobile -Credential `$AdminCred
-`$userObject | Set-ADUser -clear FacsimileTelephoneNumber -Credential `$AdminCred
-`$userObject | Set-ADUser -clear Division -Credential `$AdminCred
-`$userObject | Set-ADUser -clear Department -Credential `$AdminCred
-`$userObject | Set-ADUser -clear PhysicalDeliveryOfficeName -Credential `$AdminCred
-`$userObject | Set-ADUser -clear title -Credential `$AdminCred
-`$userObject | Set-ADUser -clear manager -Credential `$AdminCred
-`$userObject | Set-ADUser -clear msExchAssistantName -Credential `$AdminCred
-`$userObject | Set-ADUser -clear Company -Credential `$AdminCred
-`$userObject | Set-ADUser -clear generationQualifier -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear extensionattribute1 -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear extensionattribute3 -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear extensionattribute4 -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear extensionattribute5 -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear extensionattribute6 -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear extensionattribute9 -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear extensionattribute12 -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear extensionattribute13 -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear extensionattribute14 -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear personalTitle -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear middleName -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear telephonenumber -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear mobile -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear FacsimileTelephoneNumber -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear Division -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear Department -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear PhysicalDeliveryOfficeName -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear title -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear manager -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear msExchAssistantName -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear Company -Credential `$AdminCred
+`$userObject.SamAccountName | Set-ADUser -clear generationQualifier -Credential `$AdminCred
 
 #Set Attributes
 $primaryAttributeCMD

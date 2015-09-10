@@ -7,7 +7,7 @@ function format-OutHeader($object){
 #TODO Complete Output File Header
 	$ID = $object.EMPLID
 	if ($object.I_ROW_FLAG -eq "C"){
-		$userObj = $(Get-Aduser -filter {ExtensionAttribute2 -eq $ID} -properties mail,SAMAccountName)
+		$userObj = $(Get-Aduser -filter "ExtensionAttribute2 -eq $ID" -properties mail,SAMAccountName)
 	}
 	$getmail = $userObj.mail
 	$getlogin = $userObj.SAMAccountName

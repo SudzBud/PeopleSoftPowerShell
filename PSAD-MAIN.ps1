@@ -176,7 +176,7 @@ if(!($incomingfiles)){Break}
 		} else {
 			$testname = $adFMTuser.suggestedAlias
 			$testmail = $testname + "@kurtsalmon.com"
-			$ADUser = get-aduser -Filter "samaccountname -eq $testname" -Properties $adproperties
+			$ADUser = get-aduser -Filter 'samaccountname -eq "$testname"' -Properties $adproperties
 			$mailRecip = get-recipient -erroraction:silentlycontinue $testmail
 			if ($ADUser){
 				$flag = $true
