@@ -92,7 +92,7 @@ function Get-OUPath($object){
 					"M0511"{"OU=CapAdv,OU=NA,OU=Employees,DC=kurtsalmon,DC=com"}
 					"L3511"{"OU=CFOA,OU=NA,OU=Employees,DC=kurtsalmon,DC=com"}
 					{@("L4011","M1511") -contains $_}{"OU=CIOA,OU=NA,OU=Employees,DC=kurtsalmon,DC=com"}
-					{@("L9011","M2511","M6011") -contains $_}{"OU=CG,OU=NA,OU=Employees,DC=kurtsalmon,DC=com"}
+					{@("L9011","L9211","M2511","M6011") -contains $_}{"OU=CG,OU=NA,OU=Employees,DC=kurtsalmon,DC=com"}
 					"M1011"{"OU=CT,OU=NA,OU=Employees,DC=kurtsalmon,DC=com"}
 					"L7011"{"OU=FSS,OU=NA,OU=Employees,DC=kurtsalmon,DC=com"}
 					{@("L1011","M2011") -contains $_}{"OU=GFS,OU=NA,OU=Employees,DC=kurtsalmon,DC=com"}
