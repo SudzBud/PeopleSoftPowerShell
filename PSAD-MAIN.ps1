@@ -25,7 +25,7 @@ $offices = Import-Csv "$(&$ScriptDir)\officeAddresses.csv"
 $officeTable = @{}
 	foreach ($office in $offices){$officeTable.($office.office) = $office}
 $adproperties = 'displayname','mobile','facsimileTelephoneNumber','division','department','office','title','manager','company','streetaddress',`
-'city','state','postalcode','officephone','personaltitle','middlename','msexchassistantname','generationqualifier','extensionattribute1',`
+'city','state','postalcode','officephone','personaltitle','middlename','msexchassistantname','generationqualifier','mail','extensionattribute1',`
 'extensionattribute2','extensionattribute3','extensionattribute4','extensionattribute5','extensionattribute6','extensionattribute7',`
 'extensionattribute8','extensionattribute9','extensionattribute10','extensionattribute11','extensionattribute12','extensionattribute13',`
 'extensionattribute14','extensionattribute15'
@@ -268,12 +268,12 @@ if(!($incomingfiles)){Break}
 #ENDREGION Segregate EU Actions	
 
 #REGION Segregate NA Actions
-	$createNA = foreach ($adFMTcreateNA in $($adFormatUsers | Where-Object {($_.I_ROW_FLAG -eq "C") -and (($_.BUSINESS_UNIT -eq "USA") -or ($_.BUSINESS_UNIT -eq "CHN") -or ($_.BUSINESS_UNIT -eq "JPN"))})){
+	$createNA = foreach ($adFMTcreateNA in $($adFormatUsers | Where-Object {($_.I_ROW_FLAG -eq "C") -and (($_.BUSINESS_UNIT -eq "USA") -or ($_.BUSINESS_UNIT -eq "CHN") -or ($_.BUSINESS_UNIT -eq "JPN") -or ($_.BUSINESS_UNIT -eq "GFS"))})){
 		$adFMTcreateNA | Add-Member NoteProperty -Name Password $(New-Password)
 		$adFMTcreateNA | Add-Member NoteProperty -Name ScriptBlock $(Set-ksPSAdUser $adFMTcreateNA)
 		$adFMTcreateNA
 		}
-	$modifyNA = foreach ($adFMTmodifyNA in $($adFormatUsers | Where-Object {($_.I_ROW_FLAG -eq "M") -and (($_.BUSINESS_UNIT -eq "USA") -or ($_.BUSINESS_UNIT -eq "CHN") -or ($_.BUSINESS_UNIT -eq "JPN"))})){
+	$modifyNA = foreach ($adFMTmodifyNA in $($adFormatUsers | Where-Object {($_.I_ROW_FLAG -eq "M") -and (($_.BUSINESS_UNIT -eq "USA") -or ($_.BUSINESS_UNIT -eq "CHN") -or ($_.BUSINESS_UNIT -eq "JPN") -or ($_.BUSINESS_UNIT -eq "GFS"))})){
 		$adFMTmodifyNA | Add-Member NoteProperty -Name ScriptBlock $(Set-ksPSAdUser $adFMTmodifyNA)
 		$adFMTmodifyNA
 		}
